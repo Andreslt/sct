@@ -6,7 +6,7 @@ socket.on('apps', (data)=>{
 
 function render(data){
     var html = data.map((elem, index)=>{
-        return("<div><strong>"+elem.name+"</strong>: "+elem.image+"</div>");
+        return("<div><strong>"+elem.name+"</strong>: "+elem.img+"</div>");
     }).join(" ");
 
     document.getElementById('applications').innerHTML = html;
