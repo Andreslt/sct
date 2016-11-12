@@ -5,8 +5,6 @@ var service = require('./service');
 
 exports.signup = function(req, res) {
     var username = req.body.username, password=req.body.password; 
-    console.log('username: '+username);
-    console.log('password: '+password);
     var user = new User({
         username: username,
         password: password
@@ -20,11 +18,12 @@ exports.signup = function(req, res) {
 };
 
 exports.login = function(req, res) {  
-    var username = req.query.username, password=req.query.password;   
+    var username = req.body.username, password=req.body.password;   
     User.findOne({username: username}, function(err, user) {
-        console.log('usuario :'+user);
+        if (err) res.status(403).send('User doesnt exist');
+        else{
         return res
             .status(200)
-            .send({token: service.createToken(user)});
+            .send({token: service.createToken(user)});}
     });
 };
